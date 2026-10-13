@@ -25,20 +25,24 @@ bundled demo data is encoded from TTS-generated audio with no stated data licenc
 
 ## What has and has not been verified
 
-Where it says "Linux" the check ran on a Linux x86_64 build (g++) while developing; the macOS GitHub build and everything on a Mac still
-has to be confirmed. This table is updated as each one is.
+Confirmed by the GitHub macOS build (Actions run for commit `46d3d1e`) and, for the tests, also on Linux with both g++ and clang.
 
 | Check | Status |
 |---|---|
-| All 118 DSP files compile, 95 models register | passes on Linux; macOS CI not yet run |
-| Every model x 3 envelope modes x 3 sample rates: finite, bounded, not silent; pitch within 5 cents (`engine_test`) | passes on Linux (1440 runs); macOS CI not yet run |
-| Switching models while notes play, junk-filled memory (`sweep_test`) | passes on Linux; macOS CI not yet run |
-| Every engine fits the shared RAM block (`ram_probe`; largest need 16 KB of 32 KB) | passes on Linux; macOS CI not yet run |
-| Builds universal (arm64 + x86_64), macOS 11+ | not yet built |
+| All 118 DSP files compile, 95 models register, AU + VST3 build, ad-hoc sign, package | passes in macOS CI |
+| Every model x 3 envelope modes x 3 sample rates: finite, bounded, not silent; pitch within 5 cents (`engine_test`, 1440 runs) | passes in macOS CI |
+| Switching models while notes play, with junk-filled memory (`sweep_test`) | passes in macOS CI |
+| Every engine fits the shared RAM block (`ram_probe`; largest need 16 KB of 32 KB) | passes in macOS CI |
+| All models through the real plug-in code: menu index <-> model name, MIDI -> sound, Macro 4, state save/restore (`plugin_test`) | passes in macOS CI |
+| Download is universal (arm64 + x86_64), minimum macOS 11 | built with those settings; **not independently confirmed** (the `lipo` lines are in the CI log of the "Package" step) |
 | Loads in Logic on the M4 Mac mini | **not yet checked** |
 | Loads on the Intel Mac (macOS 12.7) | **not yet checked** |
-| MIDI gate / velocity behave | **not yet checked** |
+| MIDI gate / velocity feel right in a real session | **not yet checked** |
 | Sounds like the Palette hardware | **not checked: needs listening** |
+
+Tolerances worth knowing: the tests' peak limit is 2.0 (the module clips to 1.0, but resampling a hot, clipped waveform overshoots, and
+the overshoot differs slightly between compilers); in the knob-extreme stress run a model may be quiet (e.g. Question Mark with all
+three main knobs at 0) as long as it stays finite.
 
 Known behaviour: Kick, Skins, Circuit Zaps and Metalwork only sound when triggered, so they are silent in the Drone envelope mode
 (the engines have no free-running mode).
