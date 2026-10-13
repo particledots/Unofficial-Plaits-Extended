@@ -1,0 +1,2832 @@
+{
+ "note": "Trimmed from Rubato Audio's Plaits Palette catalog (lylepmills/eurorack, alt_firmwares/plaits_lab_catalog).",
+ "retired": {
+  "virtual-analog-dual": "virtual-analog-variant",
+  "virtual-analog-crossfade": "virtual-analog-variant"
+ },
+ "sharedModules": {
+  "chord-bank": [
+   "plaits/dsp/chords/chord_bank.cc"
+  ],
+  "physical-string": [
+   "plaits/dsp/physical_modelling/string.cc",
+   "plaits/dsp/physical_modelling/string_voice.cc"
+  ],
+  "physical-modal": [
+   "plaits/dsp/physical_modelling/modal_voice.cc",
+   "plaits/dsp/physical_modelling/resonator.cc"
+  ],
+  "fm-core": [
+   "plaits/dsp/fm/algorithms.cc",
+   "plaits/dsp/fm/dx_units.cc"
+  ]
+ },
+ "engines": [
+  {
+   "id": "virtual-analog",
+   "name": "Virtual Analog",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Subtractive",
+   "description": "Continuously variable analog waveforms with detuning and sync.",
+   "controls": [
+    "Detune",
+    "Variable square",
+    "Variable saw",
+    "Oscillator balance"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine/virtual_analog_engine.h",
+    "className": "VirtualAnalogEngine",
+    "member": "virtual_analog_engine_",
+    "files": [
+     "plaits/dsp/engine/virtual_analog_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": 0.8,
+    "auxGain": 0.8
+   }
+  },
+  {
+   "id": "virtual-analog-dual",
+   "name": "Virtual Analog Dual",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Subtractive",
+   "description": "One of Emilie Gillet's alternate virtual-analog designs preserved in the Plaits source: independent waveforms, interval detuning, and a synchronized alternate output.",
+   "controls": [
+    "Detune and sync",
+    "Primary waveform",
+    "Secondary waveform",
+    "Detune range"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine/virtual_analog_dual_engine.h",
+    "className": "VirtualAnalogDualEngine",
+    "member": "virtual_analog_dual_engine_",
+    "files": [
+     "plaits/dsp/engine/virtual_analog_dual_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": 0.436,
+    "auxGain": 0.436
+   }
+  },
+  {
+   "id": "virtual-analog-crossfade",
+   "name": "Virtual Analog Crossfade",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Subtractive",
+   "description": "One of Emilie Gillet's alternate virtual-analog designs preserved in the Plaits source: a waveform pair crossfading from detune through dry tone to hard sync.",
+   "controls": [
+    "Detune",
+    "Detune to sync",
+    "Common waveform",
+    "Detune range"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine/virtual_analog_crossfade_engine.h",
+    "className": "VirtualAnalogCrossfadeEngine",
+    "member": "virtual_analog_crossfade_engine_",
+    "files": [
+     "plaits/dsp/engine/virtual_analog_crossfade_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": 0.35,
+    "auxGain": 0.35
+   }
+  },
+  {
+   "id": "waveshaping",
+   "name": "Waveshaping",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Digital",
+   "description": "A variable waveshaper for clean sines, folded tones, and hard edges.",
+   "controls": [
+    "Waveshaper waveform",
+    "Fold amount",
+    "Waveform asymmetry",
+    "Wavefolder symmetry"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine/waveshaping_engine.h",
+    "className": "WaveshapingEngine",
+    "member": "waveshaping_engine_",
+    "files": [
+     "plaits/dsp/engine/waveshaping_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": 0.7,
+    "auxGain": 0.6
+   }
+  },
+  {
+   "id": "two-op-fm",
+   "name": "Two-op FM",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "FM",
+   "description": "A focused two-operator FM voice spanning pure bells to metallic noise.",
+   "controls": [
+    "Ratio",
+    "Index",
+    "Feedback",
+    "Modulator detune"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine/fm_engine.h",
+    "className": "FMEngine",
+    "member": "fm_engine_",
+    "files": [
+     "plaits/dsp/engine/fm_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": 0.6,
+    "auxGain": 0.6
+   }
+  },
+  {
+   "id": "granular-formant",
+   "name": "Granular Formant",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Granular",
+   "description": "Granular formants and filtered noise animated around the fundamental.",
+   "controls": [
+    "Formant ratio",
+    "Formant frequency",
+    "Formant width and shape",
+    "Carrier bleed"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine/grain_engine.h",
+    "className": "GrainEngine",
+    "member": "grain_engine_",
+    "files": [
+     "plaits/dsp/engine/grain_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": 0.7,
+    "auxGain": 0.6
+   }
+  },
+  {
+   "id": "harmonic",
+   "name": "Harmonic Oscillator",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Additive",
+   "description": "A bank of additive partials with spectral balance and timbral motion.",
+   "controls": [
+    "Spectral bumps",
+    "Prominent harmonic",
+    "Bump shape",
+    "Odd/even balance"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine/additive_engine.h",
+    "className": "AdditiveEngine",
+    "member": "additive_engine_",
+    "files": [
+     "plaits/dsp/engine/additive_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": 0.8,
+    "auxGain": 0.8
+   }
+  },
+  {
+   "id": "wavetable",
+   "name": "Wavetable",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Digital",
+   "description": "Smooth travel through an extensive collection of integrated waves.",
+   "controls": [
+    "Bank",
+    "Row",
+    "Column",
+    "Phase warp"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine/wavetable_engine.h",
+    "className": "WavetableEngine",
+    "member": "wavetable_engine_",
+    "files": [
+     "plaits/dsp/engine/wavetable_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": 0.6,
+    "auxGain": 0.6
+   }
+  },
+  {
+   "id": "chords",
+   "name": "Chords",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Polyphonic",
+   "description": "Four-voice chord voicings with selectable waveforms and inversions.",
+   "controls": [
+    "Chord",
+    "Inversion and transposition",
+    "Waveform",
+    "Voice-group balance"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine/chord_engine.h",
+    "className": "ChordEngine",
+    "member": "chord_engine_",
+    "files": [
+     "plaits/dsp/engine/chord_engine.cc"
+    ]
+   },
+   "sharedModules": [
+    "chord-bank"
+   ],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": 0.8,
+    "auxGain": 0.8
+   }
+  },
+  {
+   "id": "speech",
+   "name": "Speech",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Vocal",
+   "description": "Vowels, phonemes, speech synthesis, and word banks in one voice.",
+   "controls": [
+    "Model and word bank",
+    "Species",
+    "Phoneme or word",
+    "Spectral emphasis"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine/speech_engine.h",
+    "className": "SpeechEngine",
+    "member": "speech_engine_",
+    "behavior": "speech",
+    "files": [
+     "plaits/dsp/engine/speech_engine.cc",
+     "plaits/dsp/speech/lpc_speech_synth.cc",
+     "plaits/dsp/speech/lpc_speech_synth_controller.cc",
+     "plaits/dsp/speech/lpc_speech_synth_phonemes.cc",
+     "plaits/dsp/speech/lpc_speech_synth_words.cc",
+     "plaits/dsp/speech/naive_speech_synth.cc",
+     "plaits/dsp/speech/sam_speech_synth.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": -0.7,
+    "auxGain": 0.8
+   }
+  },
+  {
+   "id": "formant-speech",
+   "name": "Speech Sounds",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Vocal",
+   "description": "A split of Emilie Gillet's Speech model in the Plaits source: Naive, SAM, and LPC phonemes spread continuously across one playable model.",
+   "controls": [
+    "Model",
+    "Species",
+    "Vowel",
+    "Spectral emphasis"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/formant_speech_engine.h",
+    "className": "FormantSpeechEngine",
+    "member": "formant_speech_engine_",
+    "files": [
+     "plaits/dsp/engine2/formant_speech_engine.cc",
+     "plaits/dsp/speech/lpc_speech_synth.cc",
+     "plaits/dsp/speech/lpc_speech_synth_controller.cc",
+     "plaits/dsp/speech/lpc_speech_synth_phonemes.cc",
+     "plaits/dsp/speech/naive_speech_synth.cc",
+     "plaits/dsp/speech/sam_speech_synth.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": -0.84,
+    "auxGain": 0.96
+   }
+  },
+  {
+   "id": "lpc-speech",
+   "name": "LPC Words",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Vocal",
+   "description": "A split of Emilie Gillet's Speech model in the Plaits source: LPC word banks with selected stock or custom banks, direct speed, and recorded prosody.",
+   "controls": [
+    "Word bank",
+    "Vocal tract",
+    "Word",
+    "Speed"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/lpc_speech_engine.h",
+    "className": "LPCSpeechEngine",
+    "member": "lpc_speech_engine_",
+    "behavior": "lpc-words",
+    "files": [
+     "plaits/dsp/engine2/lpc_speech_engine.cc",
+     "plaits/dsp/speech/lpc_speech_synth.cc",
+     "plaits/dsp/speech/lpc_speech_synth_controller.cc",
+     "plaits/dsp/speech/lpc_speech_synth_phonemes.cc",
+     "plaits/dsp/speech/lpc_speech_synth_words.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": -0.7,
+    "auxGain": 0.8
+   }
+  },
+  {
+   "id": "swarm",
+   "name": "Swarm",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Texture",
+   "description": "A cloud of detuned sawtooth oscillators for supersaws and drones.",
+   "controls": [
+    "Pitch randomization",
+    "Grain density",
+    "Grain duration and overlap",
+    "Size dispersion"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine/swarm_engine.h",
+    "className": "SwarmEngine",
+    "member": "swarm_engine_",
+    "files": [
+     "plaits/dsp/engine/swarm_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": -3.0,
+    "auxGain": 1.0
+   }
+  },
+  {
+   "id": "filtered-noise",
+   "name": "Filtered Noise",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Noise",
+   "description": "Clocked noise and multimode filtering for pitched or diffuse spectra.",
+   "controls": [
+    "Filter response",
+    "Clock frequency",
+    "Resonance",
+    "Filter position"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine/noise_engine.h",
+    "className": "NoiseEngine",
+    "member": "noise_engine_",
+    "files": [
+     "plaits/dsp/engine/noise_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": -1.0,
+    "auxGain": -1.0
+   }
+  },
+  {
+   "id": "particle-noise",
+   "name": "Particle Noise",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Noise",
+   "description": "Random particles excite a resonant network from sparse ticks to clouds.",
+   "controls": [
+    "Frequency randomization",
+    "Density",
+    "Filter type",
+    "Diffusion"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine/particle_engine.h",
+    "className": "ParticleEngine",
+    "member": "particle_engine_",
+    "files": [
+     "plaits/dsp/engine/particle_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": -2.0,
+    "auxGain": 1.0
+   }
+  },
+  {
+   "id": "inharmonic-string",
+   "name": "Inharmonic String",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Physical",
+   "description": "A physical string model moving from clean plucks to inharmonic material.",
+   "controls": [
+    "Inharmonicity",
+    "Brightness",
+    "Damping",
+    "Excitation duration"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine/string_engine.h",
+    "className": "StringEngine",
+    "member": "string_engine_",
+    "files": [
+     "plaits/dsp/engine/string_engine.cc"
+    ]
+   },
+   "sharedModules": [
+    "physical-string"
+   ],
+   "postProcessing": {
+    "alreadyEnveloped": true,
+    "outGain": -1.0,
+    "auxGain": 0.8
+   }
+  },
+  {
+   "id": "modal-resonator",
+   "name": "Modal Resonator",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Physical",
+   "description": "Modal synthesis for strings, plates, tubes, bells, and struck objects.",
+   "controls": [
+    "Material",
+    "Brightness",
+    "Damping",
+    "Exciter resonance"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine/modal_engine.h",
+    "className": "ModalEngine",
+    "member": "modal_engine_",
+    "files": [
+     "plaits/dsp/engine/modal_engine.cc"
+    ]
+   },
+   "sharedModules": [
+    "physical-modal"
+   ],
+   "postProcessing": {
+    "alreadyEnveloped": true,
+    "outGain": -1.0,
+    "auxGain": 0.8
+   }
+  },
+  {
+   "id": "analog-bass-drum",
+   "name": "Analog Bass Drum",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Drums",
+   "description": "A punchy synthesized kick with controllable tone, decay, and drive.",
+   "controls": [
+    "Attack and overdrive",
+    "Brightness",
+    "Decay",
+    "Pitch-envelope punch"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine/bass_drum_engine.h",
+    "className": "BassDrumEngine",
+    "member": "bass_drum_engine_",
+    "files": [
+     "plaits/dsp/engine/bass_drum_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": true,
+    "outGain": 0.8,
+    "auxGain": 0.8
+   }
+  },
+  {
+   "id": "analog-snare",
+   "name": "Analog Snare",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Drums",
+   "description": "A modeled snare combining tuned oscillators and filtered noise.",
+   "controls": [
+    "Harmonic/noise balance",
+    "Mode balance",
+    "Decay",
+    "Shell inharmonicity"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine/snare_drum_engine.h",
+    "className": "SnareDrumEngine",
+    "member": "snare_drum_engine_",
+    "files": [
+     "plaits/dsp/engine/snare_drum_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": true,
+    "outGain": 0.8,
+    "auxGain": 0.8
+   }
+  },
+  {
+   "id": "analog-hi-hat",
+   "name": "Analog Hi-hat",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Drums",
+   "description": "Metallic cymbal oscillators and noise shaped into crisp hi-hats.",
+   "controls": [
+    "Metal/noise balance",
+    "High-pass cutoff",
+    "Decay",
+    "Oscillator spacing"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine/hi_hat_engine.h",
+    "className": "HiHatEngine",
+    "member": "hi_hat_engine_",
+    "files": [
+     "plaits/dsp/engine/hi_hat_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": true,
+    "outGain": 0.8,
+    "auxGain": 0.8
+   }
+  },
+  {
+   "id": "virtual-analog-vcf",
+   "name": "VA + VCF",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Subtractive",
+   "description": "Classic oscillator shapes through a resonant virtual-analog filter.",
+   "controls": [
+    "Resonance and filter character",
+    "Filter cutoff",
+    "Waveform and sub level",
+    "Drive"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/virtual_analog_vcf_engine.h",
+    "className": "VirtualAnalogVCFEngine",
+    "member": "virtual_analog_vcf_engine_",
+    "files": [
+     "plaits/dsp/engine2/virtual_analog_vcf_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": 1.0,
+    "auxGain": 1.0
+   }
+  },
+  {
+   "id": "phase-distortion",
+   "name": "Phase Distortion",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Digital",
+   "description": "Casio-inspired phase distortion with animated harmonic contours.",
+   "controls": [
+    "Distortion frequency",
+    "Distortion amount",
+    "Asymmetry",
+    "Modulator ratio"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/phase_distortion_engine.h",
+    "className": "PhaseDistortionEngine",
+    "member": "phase_distortion_engine_",
+    "files": [
+     "plaits/dsp/engine2/phase_distortion_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": 0.7,
+    "auxGain": 0.7
+   }
+  },
+  {
+   "id": "dx7-bank-a",
+   "name": "6-Op FM Bank A",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "FM",
+   "description": "The first bank of classic DX7-compatible six-operator FM patches stored in Plaits user data.",
+   "controls": [
+    "Patch",
+    "Brightness / carrier tilt",
+    "Envelope",
+    "Network detune"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/six_op_engine.h",
+    "className": "SixOpEngine",
+    "member": "six_op_engine_",
+    "userDataBank": 0,
+    "files": [
+     "plaits/dsp/engine2/six_op_engine.cc"
+    ]
+   },
+   "sharedModules": [
+    "fm-core"
+   ],
+   "postProcessing": {
+    "alreadyEnveloped": true,
+    "outGain": 1.0,
+    "auxGain": 1.0
+   }
+  },
+  {
+   "id": "dx7-bank-b",
+   "name": "6-Op FM Bank B",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "FM",
+   "description": "The second bank of classic DX7-compatible six-operator FM patches stored in Plaits user data.",
+   "controls": [
+    "Patch",
+    "Brightness / carrier tilt",
+    "Envelope",
+    "Network detune"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/six_op_engine.h",
+    "className": "SixOpEngine",
+    "member": "six_op_engine_",
+    "userDataBank": 1,
+    "files": [
+     "plaits/dsp/engine2/six_op_engine.cc"
+    ]
+   },
+   "sharedModules": [
+    "fm-core"
+   ],
+   "postProcessing": {
+    "alreadyEnveloped": true,
+    "outGain": 1.0,
+    "auxGain": 1.0
+   }
+  },
+  {
+   "id": "dx7-bank-c",
+   "name": "6-Op FM Bank C",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "FM",
+   "description": "The third bank of classic DX7-compatible six-operator FM patches stored in Plaits user data.",
+   "controls": [
+    "Patch",
+    "Brightness / carrier tilt",
+    "Envelope",
+    "Network detune"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/six_op_engine.h",
+    "className": "SixOpEngine",
+    "member": "six_op_engine_",
+    "userDataBank": 2,
+    "files": [
+     "plaits/dsp/engine2/six_op_engine.cc"
+    ]
+   },
+   "sharedModules": [
+    "fm-core"
+   ],
+   "postProcessing": {
+    "alreadyEnveloped": true,
+    "outGain": 1.0,
+    "auxGain": 1.0
+   }
+  },
+  {
+   "id": "wave-terrain",
+   "name": "Wave Terrain",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Digital",
+   "description": "Two-dimensional navigation across a continuously changing terrain.",
+   "controls": [
+    "Terrain",
+    "Path radius",
+    "Path offset",
+    "Y offset"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/wave_terrain_engine.h",
+    "className": "WaveTerrainEngine",
+    "member": "wave_terrain_engine_",
+    "files": [
+     "plaits/dsp/engine2/wave_terrain_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": 0.7,
+    "auxGain": 0.7
+   }
+  },
+  {
+   "id": "string-machine",
+   "name": "String Machine",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Polyphonic",
+   "description": "Divide-down ensemble strings with chord voicings and lush animation.",
+   "controls": [
+    "Chord",
+    "Filter and chorus",
+    "Waveform and registration",
+    "Ensemble amount"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/string_machine_engine.h",
+    "className": "StringMachineEngine",
+    "member": "string_machine_engine_",
+    "files": [
+     "plaits/dsp/engine2/string_machine_engine.cc"
+    ]
+   },
+   "sharedModules": [
+    "chord-bank"
+   ],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": 0.8,
+    "auxGain": 0.8
+   }
+  },
+  {
+   "id": "chiptune",
+   "name": "Chiptune",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Digital",
+   "description": "Three square-wave voices with arpeggiation and game-console grit.",
+   "controls": [
+    "Chord",
+    "Arpeggio or inversion",
+    "Pulse width and sync",
+    "Register preset"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/chiptune_engine.h",
+    "className": "ChiptuneEngine",
+    "member": "chiptune_engine_",
+    "behavior": "chiptune",
+    "files": [
+     "plaits/dsp/engine2/chiptune_engine.cc"
+    ]
+   },
+   "sharedModules": [
+    "chord-bank"
+   ],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": 0.5,
+    "auxGain": 0.5
+   }
+  },
+  {
+   "id": "natural-speech",
+   "name": "Natural Speech",
+   "author": "Lyle Mills",
+   "origin": "Rubato Lab",
+   "family": "Vocal",
+   "description": "Spoken words resynthesized through a vocal tract you can reshape, from mumbled to over-enunciated.",
+   "controls": [
+    "Word bank",
+    "Vocal tract",
+    "Word",
+    "Articulation"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/natural_speech_engine.h",
+    "className": "NaturalSpeechEngine",
+    "member": "natural_speech_engine_",
+    "files": [
+     "plaits/dsp/engine2/natural_speech_engine.cc"
+    ],
+    "behavior": "natural-speech"
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": 1.425,
+    "auxGain": 1.425
+   }
+  },
+  {
+   "id": "glisson",
+   "name": "Glisson",
+   "author": "Lyle Mills",
+   "origin": "Rubato Lab",
+   "family": "Granular",
+   "description": "Overlapping grains trace randomized upward and downward pitch glides.",
+   "controls": [
+    "Scatter",
+    "Grains",
+    "Direction",
+    "Trajectory"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/glisson_engine.h",
+    "className": "GlissonEngine",
+    "member": "glisson_engine_",
+    "files": [
+     "plaits/dsp/engine2/glisson_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": 1.311,
+    "auxGain": 1.311
+   }
+  },
+  {
+   "id": "gendy",
+   "name": "GENDY",
+   "author": "Lyle Mills",
+   "origin": "Rubato Lab",
+   "family": "Stochastic",
+   "description": "A waveform continuously rewritten by amplitude and duration random walks.",
+   "controls": [
+    "Breakpoints",
+    "Amplitude walk",
+    "Duration walk",
+    "Interpolation"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/gendy_engine.h",
+    "className": "GendyEngine",
+    "member": "gendy_engine_",
+    "files": [
+     "plaits/dsp/engine2/gendy_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": 0.95,
+    "auxGain": 0.95
+   }
+  },
+  {
+   "id": "scanned",
+   "name": "Scanned",
+   "author": "Lyle Mills",
+   "origin": "Rubato Lab",
+   "family": "Physical",
+   "description": "Scan across a slowly evolving network of coupled virtual masses.",
+   "controls": [
+    "Structure",
+    "Scan path",
+    "Wavefold",
+    "Evolution speed"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/scanned_engine.h",
+    "className": "ScannedEngine",
+    "member": "scanned_engine_",
+    "files": [
+     "plaits/dsp/engine2/scanned_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": -1.0,
+    "auxGain": -1.0
+   }
+  },
+  {
+   "id": "pulsar",
+   "name": "Pulsar",
+   "author": "Lyle Mills",
+   "origin": "Rubato Lab",
+   "family": "Microsound",
+   "description": "Windowed tone bursts move from sparse impulses to clustered formant rhythms.",
+   "controls": [
+    "Formant",
+    "Pulse width",
+    "Clusters",
+    "Skew"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/pulsar_engine.h",
+    "className": "PulsarEngine",
+    "member": "pulsar_engine_",
+    "files": [
+     "plaits/dsp/engine2/pulsar_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": 1.104,
+    "auxGain": 1.104
+   }
+  },
+  {
+   "id": "loopback",
+   "name": "Loopback",
+   "author": "Lyle Mills",
+   "origin": "Rubato Lab",
+   "family": "Feedback",
+   "description": "A normalized feedback-AM loop creates recursive sidebands without running away.",
+   "controls": [
+    "Feedback ratio",
+    "Recursion depth",
+    "Delay topology",
+    "Feedback symmetry"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/loopback_engine.h",
+    "className": "LoopbackEngine",
+    "member": "loopback_engine_",
+    "files": [
+     "plaits/dsp/engine2/loopback_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": 0.53,
+    "auxGain": 0.53
+   }
+  },
+  {
+   "id": "lockstep",
+   "name": "Lockstep",
+   "author": "Lyle Mills",
+   "origin": "Rubato Lab",
+   "family": "PLL",
+   "description": "An audible internal phase-locked loop hunts, slips, and captures harmonic ratios.",
+   "controls": [
+    "Lock ratio",
+    "Loop bandwidth",
+    "Detector character",
+    "Capture and damping"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/lockstep_engine.h",
+    "className": "LockstepEngine",
+    "member": "lockstep_engine_",
+    "files": [
+     "plaits/dsp/engine2/lockstep_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": 0.364,
+    "auxGain": 0.364
+   }
+  },
+  {
+   "id": "tapfield",
+   "name": "Tapfield",
+   "author": "Lyle Mills",
+   "origin": "Rubato Lab",
+   "family": "Bitwise",
+   "description": "Pitch-clocked Galois feedback registers become repeating binary wavefields.",
+   "controls": [
+    "Register topology",
+    "Bit decoding",
+    "Bit corruption",
+    "Slew"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/tapfield_engine.h",
+    "className": "TapfieldEngine",
+    "member": "tapfield_engine_",
+    "files": [
+     "plaits/dsp/engine2/tapfield_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": 0.8,
+    "auxGain": 0.8
+   }
+  },
+  {
+   "id": "phase-weave",
+   "name": "Phase Weave",
+   "author": "Lyle Mills",
+   "origin": "Rubato Lab",
+   "family": "Phase",
+   "description": "Four asymmetric harmonic voices weave through moving cancellation geometries.",
+   "controls": [
+    "Constellation",
+    "Phase spread",
+    "Cancellation",
+    "Rotation and drive"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/phase_weave_engine.h",
+    "className": "PhaseWeaveEngine",
+    "member": "phase_weave_engine_",
+    "files": [
+     "plaits/dsp/engine2/phase_weave_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": 0.93,
+    "auxGain": 0.93
+   }
+  },
+  {
+   "id": "sideband-bank",
+   "name": "Sideband Bank",
+   "author": "Lyle Mills",
+   "origin": "Rubato Lab",
+   "family": "Additive",
+   "description": "Finite discrete-summation banks build compact geometric ladders above and below a carrier.",
+   "controls": [
+    "Partial spacing",
+    "Geometric rolloff",
+    "Partial count",
+    "Upper/lower bias"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/sideband_engine.h",
+    "className": "SidebandEngine",
+    "member": "sideband_engine_",
+    "files": [
+     "plaits/dsp/engine2/sideband_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": 0.511,
+    "auxGain": 0.511
+   }
+  },
+  {
+   "id": "attractor",
+   "name": "Attractor",
+   "author": "Lyle Mills",
+   "origin": "Rubato Lab",
+   "family": "Chaos",
+   "description": "A bounded three-state cyclic flow turns deterministic attractor motion into audio.",
+   "controls": [
+    "Lobe density",
+    "Damping and chaos",
+    "Coordinate scan",
+    "Rate skew"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/attractor_engine.h",
+    "className": "AttractorEngine",
+    "member": "attractor_engine_",
+    "files": [
+     "plaits/dsp/engine2/attractor_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": 1.113,
+    "auxGain": 1.113
+   }
+  },
+  {
+   "id": "undertow",
+   "name": "Undertow",
+   "author": "Lyle Mills",
+   "origin": "Rubato Lab",
+   "family": "Subharmonic",
+   "description": "Six integer undertones blend through original registrations and a warped divider lattice.",
+   "controls": [
+    "Registration",
+    "Wave colour",
+    "Anchor balance",
+    "Lattice stretch"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/undertow_engine.h",
+    "className": "UndertowEngine",
+    "member": "undertow_engine_",
+    "files": [
+     "plaits/dsp/engine2/undertow_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": 1.246,
+    "auxGain": 1.246
+   }
+  },
+  {
+   "id": "reed-pipe",
+   "name": "Reed Pipe",
+   "author": "Lyle Mills",
+   "origin": "Rubato Lab",
+   "family": "Physical",
+   "description": "A nonlinear reed excites a fractional-delay bore with a movable pressure pickup.",
+   "controls": [
+    "Bore pickup",
+    "Breath pressure",
+    "Reed stiffness",
+    "Bore reflection"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/reed_pipe_engine.h",
+    "className": "ReedPipeEngine",
+    "member": "reed_pipe_engine_",
+    "files": [
+     "plaits/dsp/engine2/reed_pipe_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": 1.129,
+    "auxGain": 1.129
+   }
+  },
+  {
+   "id": "phase-flock",
+   "name": "Phase Flock",
+   "author": "Lyle Mills",
+   "origin": "Rubato Lab",
+   "family": "Coupled",
+   "description": "Seven mean-field phase oscillators disperse, synchronize, and split into antipodal clusters.",
+   "controls": [
+    "Frequency spread",
+    "Coupling",
+    "Cluster order",
+    "Phase lag"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/phase_flock_engine.h",
+    "className": "PhaseFlockEngine",
+    "member": "phase_flock_engine_",
+    "files": [
+     "plaits/dsp/engine2/phase_flock_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": 0.467,
+    "auxGain": 0.467
+   }
+  },
+  {
+   "id": "rulefield",
+   "name": "Rulefield",
+   "author": "Lyle Mills",
+   "origin": "Rubato Lab",
+   "family": "Cellular",
+   "description": "Elementary cellular-automaton generations become evolving 32-cell wavecycles.",
+   "controls": [
+    "CA rule",
+    "Cells to edges",
+    "Evolution rate",
+    "Interpolation"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/rulefield_engine.h",
+    "className": "RulefieldEngine",
+    "member": "rulefield_engine_",
+    "files": [
+     "plaits/dsp/engine2/rulefield_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": 1.0,
+    "auxGain": 1.0
+   }
+  },
+  {
+   "id": "spectral-spiral",
+   "name": "Spectral Spiral",
+   "author": "Lyle Mills",
+   "origin": "Rubato Lab",
+   "family": "Feedback",
+   "description": "A complex delay loop repeatedly frequency-shifts an analytic harmonic source.",
+   "controls": [
+    "Source richness",
+    "Shift spacing",
+    "Feedback",
+    "Shift direction"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/spectral_spiral_engine.h",
+    "className": "SpectralSpiralEngine",
+    "member": "spectral_spiral_engine_",
+    "files": [
+     "plaits/dsp/engine2/spectral_spiral_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": 0.891,
+    "auxGain": 0.891
+   }
+  },
+  {
+   "id": "z-filter",
+   "name": "Z Filter",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Subtractive",
+   "description": "Braids' four filter models in one slot: a windowed resonator burst rung against a polarity-flipped pulse train and its integral.",
+   "controls": [
+    "Model",
+    "Cutoff",
+    "Shape",
+    "Bend"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/z_filter_engine.h",
+    "className": "ZFilterEngine",
+    "member": "z_filter_engine_",
+    "files": [
+     "plaits/dsp/engine2/z_filter_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": 1.059,
+    "auxGain": 1.059
+   }
+  },
+  {
+   "id": "toy",
+   "name": "Toy",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Bitwise",
+   "description": "A bit-mangled phase ramp read through a sample-and-hold clock that can free-run or lock to the played note.",
+   "controls": [
+    "Mangle",
+    "Crush",
+    "Clock",
+    "Fold"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/toy_engine.h",
+    "className": "ToyEngine",
+    "member": "toy_engine_",
+    "files": [
+     "plaits/dsp/engine2/toy_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": -0.56,
+    "auxGain": -0.56
+   }
+  },
+  {
+   "id": "csaw",
+   "name": "CSaw",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Subtractive",
+   "description": "The emblematic Braids sawtooth, with a notch cut into the start of every cycle and a bendable ramp.",
+   "controls": [
+    "Depth",
+    "Width",
+    "Bend",
+    "Tilt"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/csaw_engine.h",
+    "className": "CSawEngine",
+    "member": "csaw_engine_",
+    "files": [
+     "plaits/dsp/engine2/csaw_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": 0.493,
+    "auxGain": 0.493
+   }
+  },
+  {
+   "id": "ring-mod",
+   "name": "Ring Mod",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Digital",
+   "description": "A carrier ring-modulated by two independently detuned sines, driven through a saturating shaper.",
+   "controls": [
+    "Detune 1",
+    "Detune 2",
+    "Depth",
+    "Drive"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/ring_mod_engine.h",
+    "className": "RingModEngine",
+    "member": "ring_mod_engine_",
+    "files": [
+     "plaits/dsp/engine2/ring_mod_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": -1.5,
+    "auxGain": -1.5
+   }
+  },
+  {
+   "id": "fold",
+   "name": "Fold",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Waveshaping",
+   "description": "Braids' two wavefolders crossfaded against each other, the sine one saturating where the triangle one keeps folding. The model Plaits' Waveshaping model descends from, with the second curve it left behind.",
+   "controls": [
+    "Blend",
+    "Fold",
+    "Symmetry",
+    "Drive"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/fold_engine.h",
+    "className": "FoldEngine",
+    "member": "fold_engine_",
+    "files": [
+     "plaits/dsp/engine2/fold_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": -0.512,
+    "auxGain": -0.512
+   }
+  },
+  {
+   "id": "buzz",
+   "name": "Buzz",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Digital",
+   "description": "Braids' two unison-tuned band-limited pulse trains, summed. Harmonic count comes from a wavetable zone lookup, not a live additive sum, so the sweep is a flat spectrum with a hard cutoff moving through it, not a shaped one.",
+   "controls": [
+    "Detune",
+    "Buzz",
+    "Spread",
+    "Reach"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/buzz_engine.h",
+    "className": "BuzzEngine",
+    "member": "buzz_engine_",
+    "files": [
+     "plaits/dsp/engine2/buzz_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": 0.591,
+    "auxGain": 0.591
+   }
+  },
+  {
+   "id": "dual-sync",
+   "name": "Dual Sync",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Subtractive",
+   "description": "Braids' two hard-sync models in one engine: a master oscillator syncs a slave swept up to 64 semitones above it, crossfaded against it. Virtual Analog's sync square shares one knob with pulse width and gain, and has no balance.",
+   "controls": [
+    "Balance",
+    "Interval",
+    "Shape",
+    "Reset"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/dual_sync_engine.h",
+    "className": "DualSyncEngine",
+    "member": "dual_sync_engine_",
+    "files": [
+     "plaits/dsp/engine2/dual_sync_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": -0.618,
+    "auxGain": -0.618
+   }
+  },
+  {
+   "id": "granular-cloud",
+   "name": "Granular Cloud",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Granular",
+   "description": "Braids' asynchronous grain cloud: four windowed sine grains respawning on a coin flip, each taking a fresh random pitch. Where Granular Formant stays locked to a carrier, this one scatters until the pitch is gone.",
+   "controls": [
+    "Scatter",
+    "Grain",
+    "Shape",
+    "Density"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/granular_cloud_engine.h",
+    "className": "GranularCloudEngine",
+    "member": "granular_cloud_engine_",
+    "files": [
+     "plaits/dsp/engine2/granular_cloud_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": 1.103,
+    "auxGain": 0.689
+   }
+  },
+  {
+   "id": "morph",
+   "name": "Morph",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Subtractive",
+   "description": "Braids' one-knob walk from triangle through saw to a narrowing pulse, into a low-pass that tracks the note and a tanh fuzz. Virtual Analog shares the waveforms and has neither.",
+   "controls": [
+    "Fuzz",
+    "Shape",
+    "Tone",
+    "Drive"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/morph_engine.h",
+    "className": "MorphEngine",
+    "member": "morph_engine_",
+    "files": [
+     "plaits/dsp/engine2/morph_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": -0.375,
+    "auxGain": -0.375
+   }
+  },
+  {
+   "id": "noise-bank",
+   "name": "Noise Bank",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Noise",
+   "description": "Braids' three noise models in one slot: noise through a resonant filter, two resonant peaks, and a sample-and-hold whose random sequence loops into a pitched buzz.",
+   "controls": [
+    "Model",
+    "Color",
+    "Shape",
+    "Drive"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/noise_bank_engine.h",
+    "className": "NoiseBankEngine",
+    "member": "noise_bank_engine_",
+    "files": [
+     "plaits/dsp/engine2/noise_bank_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": 0.704,
+    "auxGain": 0.704
+   }
+  },
+  {
+   "id": "particle-burst",
+   "name": "Particle Burst",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Noise",
+   "description": "Braids' PRTC: three fixed-interval resonant filters, a chord above the note, re-struck by a shared decaying noise burst at a random rate. Plaits' Particle Noise scatters six particles around one pitch instead — a cloud, not a chord.",
+   "controls": [
+    "Scatter",
+    "Density",
+    "Chord width",
+    "Decay"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/particle_burst_engine.h",
+    "className": "ParticleBurstEngine",
+    "member": "particle_burst_engine_",
+    "files": [
+     "plaits/dsp/engine2/particle_burst_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": 1.0,
+    "auxGain": 1.0
+   }
+  },
+  {
+   "id": "saw-square",
+   "name": "Saw Square",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Subtractive",
+   "description": "Braids' variable saw and variable square, driven from one shared TIMBRE knob that opens one as it closes the other, crossfaded by COLOR. Virtual Analog runs the same pair of waveforms independently; this is the coupled, single-knob version.",
+   "controls": [
+    "Blend",
+    "Shape",
+    "Phase",
+    "Square Level"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/saw_square_engine.h",
+    "className": "SawSquareEngine",
+    "member": "saw_square_engine_",
+    "files": [
+     "plaits/dsp/engine2/saw_square_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": 1.029,
+    "auxGain": 1.029
+   }
+  },
+  {
+   "id": "saw-swarm",
+   "name": "Saw Swarm",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Subtractive",
+   "description": "Braids' seven-voice detuned sawtooth chorus, soft-clipped and carved by a resonant filter tracking the note. A fixed chorus of deliberately raw, aliasing sawtooths — not the granular cloud of Plaits' own Swarm model.",
+   "controls": [
+    "Color",
+    "Detune",
+    "Filter",
+    "Resonance"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/saw_swarm_engine.h",
+    "className": "SawSwarmEngine",
+    "member": "saw_swarm_engine_",
+    "files": [
+     "plaits/dsp/engine2/saw_swarm_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": -1.201,
+    "auxGain": -1.201
+   }
+  },
+  {
+   "id": "vowel",
+   "name": "Vowel",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Vocal",
+   "description": "Braids' table-driven vowel synthesizer: three formants read at sixteen steps a cycle, gated by a ramp that restarts every pitch period, through a tanh shaper. The stepped ancestor of Speech's SAM mode.",
+   "controls": [
+    "Spread",
+    "Shift",
+    "Vowel",
+    "Grain"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/vowel_engine.h",
+    "className": "VowelEngine",
+    "member": "vowel_engine_",
+    "files": [
+     "plaits/dsp/engine2/vowel_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": -0.877,
+    "auxGain": -1.566
+   }
+  },
+  {
+   "id": "harmonics",
+   "name": "Harmonics",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Additive",
+   "description": "Braids' twelve-partial additive stack, with two Lorentzian bumps sliding over the harmonic series. Its integer amplitude slew gates quiet partials out entirely, the grain the Plaits Harmonic Oscillator's float smoothing does not have.",
+   "controls": [
+    "Color",
+    "Peak",
+    "Spread",
+    "Width"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/harmonics_engine.h",
+    "className": "HarmonicsEngine",
+    "member": "harmonics_engine_",
+    "files": [
+     "plaits/dsp/engine2/harmonics_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": 0.8,
+    "auxGain": 0.8
+   }
+  },
+  {
+   "id": "vosim",
+   "name": "VOSIM",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Vocal",
+   "description": "Braids' VOSM: two sine formants under a bell window the played note restarts. Both formant pitches are absolute and set independently, reaching pairs Granular Formant's ratio control cannot, and the 2:1 balance is a knob.",
+   "controls": [
+    "Formant 2",
+    "Formant 1",
+    "Window",
+    "Balance"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/vosim_engine.h",
+    "className": "VosimEngine",
+    "member": "vosim_engine_",
+    "files": [
+     "plaits/dsp/engine2/vosim_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": -0.694,
+    "auxGain": -0.694
+   }
+  },
+  {
+   "id": "plucked",
+   "name": "Plucked",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Physical",
+   "description": "Braids' PLUK: three round-robin Karplus-Strong voices, a noise burst dropped into a resonant loop per strike. Inharmonic String is the same round robin with a far more elaborate model; this keeps PLUK's own stochastic damping instead.",
+   "controls": [
+    "Pluck",
+    "Damping",
+    "Chord",
+    "Stretch"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/plucked_engine.h",
+    "className": "PluckedEngine",
+    "member": "plucked_engine_",
+    "files": [
+     "plaits/dsp/engine2/plucked_engine.cc"
+    ]
+   },
+   "sharedModules": [
+    "chord-bank"
+   ],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": 1.537,
+    "auxGain": 1.537
+   }
+  },
+  {
+   "id": "blown",
+   "name": "Blown",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Physical",
+   "description": "Braids' blown bore: one delay line closed by an inverting reflection, driven by a clipped reed and a breath pressure the noise rides on. Its tone filter sits outside the loop, so the body color and the pipe are separate controls.",
+   "controls": [
+    "Body",
+    "Focus",
+    "Blow",
+    "Reed"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/blown_engine.h",
+    "className": "BlownEngine",
+    "member": "blown_engine_",
+    "files": [
+     "plaits/dsp/engine2/blown_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": -2.23,
+    "auxGain": -2.23
+   }
+  },
+  {
+   "id": "struck-bell",
+   "name": "Struck Bell",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Additive",
+   "description": "Braids' BELL: eleven fixed inharmonic partials, additively synthesized and struck once per trigger, sharing one decay curve and one odd/even detune. A fixed hand-tuned voicing, not a stretched-harmonic formula.",
+   "controls": [
+    "Detune",
+    "Decay",
+    "Brightness",
+    "Decay spread"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/struck_bell_engine.h",
+    "className": "StruckBellEngine",
+    "member": "struck_bell_engine_",
+    "files": [
+     "plaits/dsp/engine2/struck_bell_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": true,
+    "outGain": 1.325,
+    "auxGain": 1.325
+   }
+  },
+  {
+   "id": "struck-drum",
+   "name": "Struck Drum",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Additive",
+   "description": "Braids' DRUM: six fixed partials struck once per trigger. Two are ring-modulated by lowpass-filtered noise instead of played straight — a different mechanism from a resonator excited by noise.",
+   "controls": [
+    "Color",
+    "Decay",
+    "Spread",
+    "Decay spread"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/struck_drum_engine.h",
+    "className": "StruckDrumEngine",
+    "member": "struck_drum_engine_",
+    "files": [
+     "plaits/dsp/engine2/struck_drum_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": true,
+    "outGain": 1.243,
+    "auxGain": 1.243
+   }
+  },
+  {
+   "id": "kick",
+   "name": "Kick",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Drums",
+   "description": "Braids' self-enveloping kick: two decaying pulses into a bandpass that jumps up in pitch for a brief click, then self-brightens. A different mechanism from Plaits' own Analog Bass Drum, which clicks with FM rather than a retuned filter.",
+   "controls": [
+    "Tone",
+    "Decay",
+    "Balance",
+    "Punch"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/kick_engine.h",
+    "className": "KickEngine",
+    "member": "kick_engine_",
+    "files": [
+     "plaits/dsp/engine2/kick_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": true,
+    "outGain": 1.0,
+    "auxGain": 0.8
+   }
+  },
+  {
+   "id": "snare",
+   "name": "Snare",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Drums",
+   "description": "Braids' SNAR: two decaying pulses into two fixed-interval tonal resonators, and a decaying noise burst into a third, high resonator, all self-enveloping and summed. A note strikes shorter the higher it is played.",
+   "controls": [
+    "Snap",
+    "Tone",
+    "Snap balance",
+    "Spread"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/snare_engine.h",
+    "className": "SnareEngine",
+    "member": "snare_engine_",
+    "files": [
+     "plaits/dsp/engine2/snare_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": true,
+    "outGain": 1.0,
+    "auxGain": 1.0
+   }
+  },
+  {
+   "id": "cymbal",
+   "name": "Cymbal",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Drums",
+   "description": "Braids' CYMBAL: six square oscillators through a resonant bandpass, crossfaded against clocked noise through a resonant highpass. Free-running, not self-enveloping.",
+   "controls": [
+    "Color",
+    "Tone",
+    "Spread",
+    "Resonance"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/cymbal_engine.h",
+    "className": "CymbalEngine",
+    "member": "cymbal_engine_",
+    "files": [
+     "plaits/dsp/engine2/cymbal_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": 1.206,
+    "auxGain": 1.206
+   }
+  },
+  {
+   "id": "wave-scan",
+   "name": "Wave Scan",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Wavetable",
+   "description": "Braids' three wavetable models in one slot, over its own set of 256 8-bit waves: 20 named banks, a 16x16 interpolated map, and a curated line with a phase-domain crush.",
+   "controls": [
+    "Model",
+    "Scan",
+    "Shape",
+    "Snap"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/wave_scan_engine.h",
+    "className": "WaveScanEngine",
+    "member": "wave_scan_engine_",
+    "files": [
+     "plaits/dsp/engine2/wave_scan_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": -0.614,
+    "auxGain": -0.614
+   }
+  },
+  {
+   "id": "wave-paraphonic",
+   "name": "Wave Paraphonic",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Polyphonic",
+   "description": "Four wavetable voices play the active Plaits chord table over Braids' 33-wave scan line, with per-voice wave fan and continuous interval scaling.",
+   "controls": [
+    "Chord",
+    "Wave",
+    "Fan",
+    "Spread"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/wave_paraphonic_engine.h",
+    "className": "WaveParaphonicEngine",
+    "member": "wave_paraphonic_engine_",
+    "files": [
+     "plaits/dsp/engine2/wave_paraphonic_engine.cc"
+    ]
+   },
+   "sharedModules": [
+    "chord-bank"
+   ],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": 1.278,
+    "auxGain": 1.278
+   }
+  },
+  {
+   "id": "fluted",
+   "name": "Fluted",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Physical",
+   "description": "A jet flute derived from Braids' FLUT: a bore and a jet delay line sharing one loop, driven by an asymmetric cubic jet and a breath the noise multiplies. It overblows into a higher register, as the module does.",
+   "controls": [
+    "Embouchure",
+    "Air",
+    "Blow",
+    "Body"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/fluted_engine.h",
+    "className": "FlutedEngine",
+    "member": "fluted_engine_",
+    "files": [
+     "plaits/dsp/engine2/fluted_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": -0.8,
+    "auxGain": -0.8
+   }
+  },
+  {
+   "id": "question-mark",
+   "name": "Question Mark",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Noise",
+   "description": "Braids' hidden model, reachable on the module only with the marquee set to “49”: a Morse transmitter keying a sine over a drifting noise bed, through a squared-distortion stage.",
+   "controls": [
+    "Static",
+    "Speed",
+    "Bed",
+    "Grit"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/question_mark_engine.h",
+    "className": "QuestionMarkEngine",
+    "member": "question_mark_engine_",
+    "files": [
+     "plaits/dsp/engine2/question_mark_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": -1.327,
+    "auxGain": -1.327
+   }
+  },
+  {
+   "id": "virtual-analog-variant",
+   "name": "Virtual Analog Variant",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Subtractive",
+   "description": "Emilie Gillet's two alternate virtual-analog designs preserved in the Plaits source, unified: a detuned or hard-synced second oscillator on one trajectory, with independently spread waveshapes.",
+   "controls": [
+    "Interval",
+    "Waveshape",
+    "Detune to sync",
+    "Shape spread"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine/virtual_analog_variant_engine.h",
+    "className": "VirtualAnalogVariantEngine",
+    "member": "virtual_analog_variant_engine_",
+    "files": [
+     "plaits/dsp/engine/virtual_analog_variant_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": 0.337,
+    "auxGain": 0.337
+   }
+  },
+  {
+   "id": "bowed",
+   "name": "Bowed",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Physical",
+   "description": "A bowed string waveguide with a stick-slip friction exciter, a movable bow, and an adjustable instrument body.",
+   "controls": [
+    "Bow position",
+    "Bow pressure",
+    "Nut damping",
+    "Body"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/bowed_engine.h",
+    "className": "BowedEngine",
+    "member": "bowed_engine_",
+    "files": [
+     "plaits/dsp/engine2/bowed_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": -2.993,
+    "auxGain": -2.993
+   }
+  },
+  {
+   "id": "sub-oscillator",
+   "name": "Sub Osc",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Subtractive",
+   "description": "A shaped main oscillator against a square sub one or two octaves down, loudest at both ends of the sub control.",
+   "controls": [
+    "Shape",
+    "Width",
+    "Sub level",
+    "Sub width"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/sub_oscillator_engine.h",
+    "className": "SubOscillatorEngine",
+    "member": "sub_oscillator_engine_",
+    "files": [
+     "plaits/dsp/engine2/sub_oscillator_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": -0.593,
+    "auxGain": -0.593
+   }
+  },
+  {
+   "id": "digital-modulation",
+   "name": "Digital Modulation",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Digital",
+   "description": "A carrier driven by a framed packet of dibits through a four-point constellation, with an openable frame.",
+   "controls": [
+    "Frame",
+    "Symbol rate",
+    "Shaping",
+    "Payload"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/digital_modulation_engine.h",
+    "className": "DigitalModulationEngine",
+    "member": "digital_modulation_engine_",
+    "files": [
+     "plaits/dsp/engine2/digital_modulation_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": -0.768,
+    "auxGain": -0.698
+   }
+  },
+  {
+   "id": "saw-comb",
+   "name": "Saw Comb",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Feedback",
+   "description": "A band-limited exciter through a comb whose pitch is decoupled from the played note, with genuinely bipolar feedback.",
+   "controls": [
+    "Resonance",
+    "Comb pitch",
+    "Exciter",
+    "Loop tilt"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/saw_comb_engine.h",
+    "className": "SawCombEngine",
+    "member": "saw_comb_engine_",
+    "files": [
+     "plaits/dsp/engine2/saw_comb_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": -0.547,
+    "auxGain": -0.547
+   }
+  },
+  {
+   "id": "vowel-fof",
+   "name": "Vowel FOF",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Vocal",
+   "description": "Five very narrow filters sweeping five vowels across five vocal registers, with the formant balance Braids leaves flat. The ancestor of Speech's naive mode, on the same vowel and register grid, carried here at finer resolution.",
+   "controls": [
+    "Brightness",
+    "Vowel",
+    "Register",
+    "Formant tilt"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/vowel_fof_engine.h",
+    "className": "VowelFofEngine",
+    "member": "vowel_fof_engine_",
+    "files": [
+     "plaits/dsp/engine2/vowel_fof_engine.cc",
+     "plaits/dsp/engine2/vowel_fof_data.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": -3.045,
+    "auxGain": -3.045
+   }
+  },
+  {
+   "id": "raw-fm",
+   "name": "Raw FM",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "FM",
+   "description": "Braids' three FM models on one axis: self-feedback, plain two-operator FM, and chaotic frequency feedback. The ancestor of Two-op FM, sharing its ratio quantizer and feedback axis, run raw: unfiltered feedback, no oversampling.",
+   "controls": [
+    "Ratio",
+    "Index",
+    "Character",
+    "Depth"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/raw_fm_engine.h",
+    "className": "RawFmEngine",
+    "member": "raw_fm_engine_",
+    "files": [
+     "plaits/dsp/engine2/raw_fm_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": -0.45,
+    "auxGain": -0.45
+   }
+  },
+  {
+   "id": "triple",
+   "name": "Triple",
+   "author": "Emilie Gillet",
+   "origin": "Mutable Instruments",
+   "family": "Polyphonic",
+   "description": "Three oscillators with two continuously swept interval knobs, morphing together through square, saw, triangle, and sine. It overlaps Chords and Swarm in territory, not lineage: intervals you sweep rather than a table you author.",
+   "controls": [
+    "Spread",
+    "Interval",
+    "Waveform",
+    "Shape"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/triple_engine.h",
+    "className": "TripleEngine",
+    "member": "triple_engine_",
+    "files": [
+     "plaits/dsp/engine2/triple_engine.cc",
+     "plaits/dsp/engine2/triple_engine_data.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": -0.774,
+    "auxGain": -0.774
+   }
+  },
+  {
+   "id": "bytebeat",
+   "name": "Bytebeat",
+   "author": "Tim Churches",
+   "origin": "Community",
+   "family": "Digital",
+   "description": "Four integer expressions read as audio, pitch-tracked and with an openable mask width. From Tim Churches' Bees-in-the-Trees firmware for Braids.",
+   "controls": [
+    "Term A",
+    "Term B",
+    "Expression",
+    "Mask width"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/bytebeat_engine.h",
+    "className": "BytebeatEngine",
+    "member": "bytebeat_engine_",
+    "files": [
+     "plaits/dsp/engine2/bytebeat_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": -0.653,
+    "auxGain": -0.653
+   }
+  },
+  {
+   "id": "diatonic-chord",
+   "name": "Diatonic Chord",
+   "author": "Tom Burns",
+   "origin": "Community",
+   "family": "Polyphonic",
+   "description": "Chords stacked in scale degrees rather than fixed intervals, so the quality follows the played note. From Tom Burns' Braids Renaissance firmware.",
+   "controls": [
+    "Chord",
+    "Spread",
+    "Waveform",
+    "Scale"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/diatonic_chord_engine.h",
+    "className": "DiatonicChordEngine",
+    "member": "diatonic_chord_engine_",
+    "files": [
+     "plaits/dsp/engine2/diatonic_chord_engine.cc",
+     "plaits/dsp/engine2/scale_voices.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": -1.213,
+    "auxGain": -1.213
+   }
+  },
+  {
+   "id": "scale-stack",
+   "name": "Scale Stack",
+   "author": "Tom Burns",
+   "origin": "Community",
+   "family": "Polyphonic",
+   "description": "Five voices spaced an equal number of scale degrees apart, sweeping from cluster to wide chord without ever leaving the scale. From Tom Burns' Braids Renaissance firmware.",
+   "controls": [
+    "Span",
+    "Spread",
+    "Waveform",
+    "Scale"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/scale_stack_engine.h",
+    "className": "ScaleStackEngine",
+    "member": "scale_stack_engine_",
+    "files": [
+     "plaits/dsp/engine2/scale_stack_engine.cc",
+     "plaits/dsp/engine2/scale_voices.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": -1.148,
+    "auxGain": -1.148
+   }
+  },
+  {
+   "id": "wavetable-chord",
+   "name": "Wavetable Diatonic Chord",
+   "author": "Tom Burns",
+   "origin": "Community",
+   "family": "Polyphonic",
+   "description": "Diatonic chords over Braids Renaissance's WTCH scan, with independent voice spread and wavetable position. From Tom Burns' Braids Renaissance firmware.",
+   "controls": [
+    "Chord",
+    "Spread",
+    "Wavetable",
+    "Scale"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/wavetable_chord_engine.h",
+    "className": "WavetableChordEngine",
+    "member": "wavetable_chord_engine_",
+    "files": [
+     "plaits/dsp/engine2/wavetable_chord_engine.cc",
+     "plaits/dsp/engine2/scale_voices.cc",
+     "plaits/dsp/engine2/scale_wavetable_voices.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": -0.65,
+    "auxGain": -0.65
+   }
+  },
+  {
+   "id": "wavetable-scale-stack",
+   "name": "Wavetable Scale Stack",
+   "author": "Tom Burns",
+   "origin": "Community",
+   "family": "Polyphonic",
+   "description": "Five scale-spaced voices over Braids Renaissance's WTx6 scan, with independent span, spread, and wavetable position. From Tom Burns' Braids Renaissance firmware.",
+   "controls": [
+    "Span",
+    "Spread",
+    "Wavetable",
+    "Scale"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/wavetable_scale_stack_engine.h",
+    "className": "WavetableScaleStackEngine",
+    "member": "wavetable_scale_stack_engine_",
+    "files": [
+     "plaits/dsp/engine2/wavetable_scale_stack_engine.cc",
+     "plaits/dsp/engine2/scale_voices.cc",
+     "plaits/dsp/engine2/scale_wavetable_voices.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": -0.6,
+    "auxGain": -0.6
+   }
+  },
+  {
+   "id": "shakers",
+   "name": "Shakers",
+   "author": "Lyle Mills, after Perry R. Cook and Gary P. Scavone",
+   "origin": "Rubato Lab",
+   "family": "Percussion",
+   "description": "Sixteen shaken and scraped instruments from Perry Cook's PhISEM, which models the statistics of colliding objects rather than any one object's shape.",
+   "controls": [
+    "Instrument",
+    "Shake",
+    "Decay",
+    "Objects"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/shakers_engine.h",
+    "className": "ShakersEngine",
+    "member": "shakers_engine_",
+    "files": [
+     "plaits/dsp/engine2/shakers_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": true,
+    "outGain": 1.0,
+    "auxGain": 1.0
+   }
+  },
+  {
+   "id": "brass",
+   "name": "Brass",
+   "author": "Lyle Mills, after Perry R. Cook and Gary P. Scavone",
+   "origin": "Rubato Lab",
+   "family": "Physical",
+   "description": "A lip-reed brass instrument after Perry R. Cook and Gary P. Scavone's STK brass model. Breath makes it speak, and the lip knob climbs the bore's harmonic series the way a bugle player does.",
+   "controls": [
+    "Lip",
+    "Breath",
+    "Bell",
+    "Buzz"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/brass_engine.h",
+    "className": "BrassEngine",
+    "member": "brass_engine_",
+    "files": [
+     "plaits/dsp/engine2/brass_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": -2.087,
+    "auxGain": 1.67
+   }
+  },
+  {
+   "id": "helix",
+   "name": "Helix",
+   "author": "Lyle Mills",
+   "origin": "Rubato Lab",
+   "family": "Chords",
+   "description": "A chord stacked across octaves on a Shepard helix, gliding endlessly up or down without ever changing register.",
+   "controls": [
+    "Chord",
+    "Glide",
+    "Fold",
+    "Spread"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/helix_engine.h",
+    "className": "HelixEngine",
+    "member": "helix_engine_",
+    "files": [
+     "plaits/dsp/engine2/helix_engine.cc"
+    ]
+   },
+   "sharedModules": [
+    "chord-bank"
+   ],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": 0.8,
+    "auxGain": 0.8
+   }
+  },
+  {
+   "id": "skins",
+   "name": "Skins",
+   "author": "Lyle Mills",
+   "origin": "Rubato Lab",
+   "family": "Percussion",
+   "description": "Struck membrane modes move from a round open head to a tighter loaded skin, with center, rim, damping, and pitch-dive control.",
+   "controls": [
+    "Membrane",
+    "Strike",
+    "Damping",
+    "Pressure"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/skins_engine.h",
+    "className": "SkinsEngine",
+    "member": "skins_engine_",
+    "files": [
+     "plaits/dsp/engine2/skins_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": true,
+    "outGain": 1.438,
+    "auxGain": 1.438
+   }
+  },
+  {
+   "id": "circuit-zaps",
+   "name": "Circuit Zaps",
+   "author": "Lyle Mills",
+   "origin": "Rubato Lab",
+   "family": "Percussion",
+   "description": "Falling-pitch electronic strikes cross two oscillators into ring-modulated zaps, sparks, and driven discharges.",
+   "controls": [
+    "Topology",
+    "Dive",
+    "Tail",
+    "Charge"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/circuit_zaps_engine.h",
+    "className": "CircuitZapsEngine",
+    "member": "circuit_zaps_engine_",
+    "files": [
+     "plaits/dsp/engine2/circuit_zaps_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": true,
+    "outGain": 0.88,
+    "auxGain": 0.88
+   }
+  },
+  {
+   "id": "metalwork",
+   "name": "Metalwork",
+   "author": "Lyle Mills",
+   "origin": "Rubato Lab",
+   "family": "Percussion",
+   "description": "Paired inharmonic modes turn one struck-metal model into anvil, agogo, plate, and gong families with controllable beating.",
+   "controls": [
+    "Object",
+    "Hardness",
+    "Damping",
+    "Beating"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/metalwork_engine.h",
+    "className": "MetalworkEngine",
+    "member": "metalwork_engine_",
+    "files": [
+     "plaits/dsp/engine2/metalwork_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": true,
+    "outGain": 2.545,
+    "auxGain": 2.545
+   }
+  },
+  {
+   "id": "clap",
+   "name": "Analog Clap",
+   "author": "Dylan Bolink",
+   "origin": "Community",
+   "family": "Drums",
+   "description": "808-style clap, noise gated a few milliseconds at a time into a wide band with a steep bottom, and a longer tail for the room. Four hands become seven that disagree; unpatched, an audience.",
+   "controls": [
+    "Hands",
+    "Tone",
+    "Room",
+    "Spacing"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/clap_engine.h",
+    "className": "ClapEngine",
+    "member": "clap_engine_",
+    "files": [
+     "plaits/dsp/engine2/clap_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": true,
+    "outGain": 1.062,
+    "auxGain": 1.062
+   }
+  },
+  {
+   "id": "analog-percussion",
+   "name": "Analog Percussion",
+   "author": "Dylan Bolink",
+   "origin": "Community",
+   "family": "Drums",
+   "description": "The 808's tuned percussion: toms, congas, rimshot, claves, and cowbell are points in one plane of pitch, ring length, and material rather than separate instruments.",
+   "controls": [
+    "Click",
+    "Material",
+    "Decay",
+    "Ratio"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/analog_percussion_engine.h",
+    "className": "AnalogPercussionEngine",
+    "member": "analog_percussion_engine_",
+    "files": [
+     "plaits/dsp/engine2/analog_percussion_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": true,
+    "outGain": 1.013,
+    "auxGain": 1.013
+   }
+  },
+  {
+   "id": "freshets-formant",
+   "name": "Freshets Formant",
+   "author": "Dylan Bolink",
+   "origin": "Community",
+   "family": "Formant",
+   "description": "A driver oscillator firing a Serge-style AD envelope read through a waveshaper. Pulses arriving mid-attack are skipped, so low ratios subdivide the driver instead of retriggering it. Ported from Tides 2 Freshets alternative firmware.",
+   "controls": [
+    "Ratio",
+    "Smoothness",
+    "Slope",
+    "Shape"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/freshets_formant_engine.h",
+    "className": "FreshetsFormantEngine",
+    "member": "freshets_formant_engine_",
+    "files": [
+     "plaits/dsp/engine2/freshets_formant_engine.cc",
+     "plaits/dsp/engine2/freshets_formant_shapes.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": 1.4,
+    "auxGain": 0.856
+   }
+  },
+  {
+   "id": "bubbletime",
+   "name": "BubbleTime",
+   "author": "Combust",
+   "origin": "Community",
+   "family": "Experimental",
+   "description": "A bubbly point-process instrument: strike timing drawn from a rigidity ladder (hyperuniform to clustered) pings chord-tone plucks. A bubbling timing generator at CV rates; a bubbling arp at audio rates.",
+   "controls": [
+    "Rigidity",
+    "Tempo/Char",
+    "Wrap",
+    "Loop"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/bubbletime_engine.h",
+    "className": "BubbleTimeEngine",
+    "member": "bubbletime_engine_",
+    "files": [
+     "plaits/dsp/engine2/bubbletime_engine.cc",
+     "plaits/dsp/engine2/ars_luts.h"
+    ]
+   },
+   "sharedModules": [
+    "chord-bank"
+   ],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": 0.8,
+    "auxGain": 1.0
+   }
+  },
+  {
+   "id": "zxphase48k",
+   "name": "ZxPhase48k",
+   "author": "Combust",
+   "origin": "Community",
+   "family": "Chiptune",
+   "description": "ZX Spectrum beeper interference synthesis: two squares boolean-combined on a 1-bit bus that also XORs with its own past — a boolean flanger. Audio into V/OCT is crushed block-rate FM, on purpose.",
+   "controls": [
+    "Mix method",
+    "PWM",
+    "Interval",
+    "Clean/Ghost"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/zxphase48k_engine.h",
+    "className": "ZxPhase48kEngine",
+    "member": "zxphase48k_engine_",
+    "files": [
+     "plaits/dsp/engine2/zxphase48k_engine.cc",
+     "plaits/dsp/engine2/pulse_core.h"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": 0.8,
+    "auxGain": 0.8
+   }
+  },
+  {
+   "id": "zxpulse48k",
+   "name": "ZxPulse48k",
+   "author": "Combust",
+   "origin": "Community",
+   "family": "Chiptune",
+   "description": "Follin-style 1-bit pulse-frequency modulation: chord-bank driven pin-train stacks and arpeggios with pulse-width-as-volume, tick-quantized echo, load-dependent pitch pull, and selectable voice-level stereo.",
+   "controls": [
+    "Chord",
+    "Pin width",
+    "Stack/Arp",
+    "Echo/Pull"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/zxpulse48k_engine.h",
+    "className": "ZxPulse48kEngine",
+    "member": "zxpulse48k_engine_",
+    "files": [
+     "plaits/dsp/engine2/zxpulse48k_engine.cc",
+     "plaits/dsp/engine2/pulse_core.h"
+    ]
+   },
+   "sharedModules": [
+    "chord-bank"
+   ],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": 1.824,
+    "auxGain": 1.824
+   }
+  },
+  {
+   "id": "acid",
+   "name": "Acid",
+   "author": "Dylan Bolink",
+   "origin": "Community",
+   "family": "Acid",
+   "description": "A silver-box bassline voice: one saw-to-pulse oscillator into a four-pole ladder, then a diode-style clipper. The filter sweep is DECAY through MORPH's attenuverter, and LEVEL is a real accent.",
+   "controls": [
+    "Resonance",
+    "Drive",
+    "Cutoff",
+    "Waveform"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/acid_engine.h",
+    "className": "AcidEngine",
+    "member": "acid_engine_",
+    "files": [
+     "plaits/dsp/engine2/acid_engine.cc"
+    ]
+   },
+   "sharedModules": [],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": 0.631,
+    "auxGain": 0.631
+   }
+  },
+  {
+   "id": "chords-supersaw",
+   "name": "Supersaw Chords",
+   "author": "Dirk Hoppmann",
+   "origin": "Community",
+   "family": "Polyphonic",
+   "description": "Chords on unevenly detuned saw stacks, with a saturator on TIMBRE and the detune spread on MORPH.",
+   "controls": [
+    "Chord",
+    "Drive",
+    "Detune spread",
+    "Stack size"
+   ],
+   "source": {
+    "header": "plaits/dsp/engine2/chords_supersaw_engine.h",
+    "className": "ChordsSupersawEngine",
+    "member": "chords_supersaw_engine_",
+    "files": [
+     "plaits/dsp/engine2/chords_supersaw_engine.cc"
+    ]
+   },
+   "sharedModules": [
+    "chord-bank"
+   ],
+   "postProcessing": {
+    "alreadyEnveloped": false,
+    "outGain": 0.983,
+    "auxGain": 0.983
+   }
+  }
+ ]
+}
