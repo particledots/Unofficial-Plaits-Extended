@@ -1,0 +1,63 @@
+name: Build plugin (macOS)
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+  workflow_dispatch:      # adds a "Run workflow" button in the Actions tab
+
+jobs:
+  build-macos:
+    runs-on: macos-14     # Apple silicon runner
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure
+        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DCOPY_PLUGIN_AFTER_BUILD=OFF -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64" -DCMAKE_OSX_DEPLOYMENT_TARGET=11.0
+
+      - name: Build engine test, then run it
+        run: |
+          cmake --build build --target engine_test sweep_test ram_probe -j4
+          ./build/ram_probe
+          ./build/engine_test
+          JUNK=0xFF ./build/sweep_test 48000
+          JUNK=0x7F ./build/sweep_test 44100
+
+      - name: Build AU + VST3
+        run: cmake --build build --target PlaitsExtended_AU PlaitsExtended_VST3 -j4
+
+      - name: Ad-hoc sign (lets Apple silicon load an unsigned build)
+        run: |
+          for b in build/PlaitsExtended_artefacts/Release/AU/*.component build/PlaitsExtended_artefacts/Release/VST3/*.vst3; do
+            codesign --force --deep -s - "$b"
+          done
+
+      - name: Package
+        run: |
+          mkdir -p dist
+          cp -R build/PlaitsExtended_artefacts/Release/AU/*.component dist/
+          cp -R build/PlaitsExtended_artefacts/Release/VST3/*.vst3 dist/
+          mkdir -p dist/licenses
+          cp licenses/CREDITS.md licenses/MIT.txt third_party/stmlib/LICENSE third_party/PALETTE_VERSION dist/licenses/
+          lipo -archs dist/*.component/Contents/MacOS/*
+          # Show the minimum macOS version baked into each slice (should say 11.0):
+          for a in arm64 x86_64; do echo "== $a"; lipo -thin $a dist/*.component/Contents/MacOS/* -output /tmp/slice_$a; otool -l /tmp/slice_$a | grep -A4 -E "LC_BUILD_VERSION|LC_VERSION_MIN" | grep -E "minos|version"; done
+          cat > dist/INSTALL.txt <<'TXT'
+          1. Unzip.
+          2. Open Terminal and run:   xattr -dr com.apple.quarantine ~/Downloads/Plaits-Extended-macOS/*
+             (adjust the path if you unzipped elsewhere; this clears the "downloaded from internet" block)
+          3. Copy "Unofficial Plaits Extended.component" to  ~/Library/Audio/Plug-Ins/Components/
+             Copy "Unofficial Plaits Extended.vst3"       to  ~/Library/Audio/Plug-Ins/VST3/
+          4. In Logic: Settings > Plug-in Manager > rescan.
+          5. It is a plain instrument (no audio input): make a Software Instrument track, click its
+             Instrument slot, and choose Audio Units > particledots > Unofficial Plaits Extended. Play it from a MIDI keyboard.
+          6. Notes: a few percussion models (Kick, Skins, Circuit Zaps, Metalwork) only sound when triggered, so use the
+             Ping or Gate envelope with them; in Drone mode they stay silent, as they do on the hardware.
+          7. Credits and licences: see the "licenses" folder, and the ABOUT button in the plug-in.
+          TXT
+          ditto -c -k --keepParent dist Plaits-Extended-macOS.zip
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Plaits-Extended-macOS
+          path: Plaits-Extended-macOS.zip
