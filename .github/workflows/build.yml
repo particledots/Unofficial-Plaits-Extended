@@ -63,7 +63,7 @@ jobs:
           path: Plaits-Extended-macOS.zip
 
       # After the upload on purpose: a problem here shows up red but can never stop the plug-in artifact from being produced.
-      - name: Processor test (all models through the real plug-in code: parameters, MIDI, state)
+      - name: Processor test (all models through the real plug-in code - parameters, MIDI, state)
         timeout-minutes: 10
         run: |
           cmake --build build --target plugin_test -j4
