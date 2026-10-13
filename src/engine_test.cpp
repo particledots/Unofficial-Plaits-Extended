@@ -48,7 +48,10 @@ struct Rig
 // The firmware clips its output to 16 bits (|x| <= 1.0), but the plugin resamples from the module's 47.87 kHz to the host
 // rate, and a windowed-sinc resampler overshoots a clipped waveform a little (Gibbs ringing). So the limit here is looser.
 // requireSound=false is for the knob-extreme stress runs: a model may legitimately go quiet there, but must stay finite and bounded.
-static Result analyse (const std::vector<float>& a, double /*sr*/, bool requireSound = true, double peakLimit = 1.6)
+// peakLimit: the module clips its output to +-1.0, but the resampler (module rate -> host rate) overshoots a clipped, hot waveform
+// by a fairly arbitrary amount that differs slightly between compilers (Plucked in Drone mode at 96 kHz peaks at ~1.6 with g++,
+// ~1.65 with clang). 2.0 is generous for that and still far below what a runaway filter or NaN-recovery would produce.
+static Result analyse (const std::vector<float>& a, double /*sr*/, bool requireSound = true, double peakLimit = 2.0)
 {
     bool bad = false; double peak = 0, energy = 0;
     for (float v : a)

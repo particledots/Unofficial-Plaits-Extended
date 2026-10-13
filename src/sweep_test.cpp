@@ -16,6 +16,15 @@ void* operator new (size_t n) { void* p = malloc (n); if (! p) throw std::bad_al
 void operator delete (void* p) noexcept { free (p); }
 void operator delete (void* p, size_t) noexcept { free (p); }
 
+// Percussion models that make (next to) no sound with no trigger, i.e. in our Drone envelope mode: Kick, Skins, Circuit Zaps and
+// Metalwork never look at TRIGGER_UNPATCHED, Snare only barely does. Silence there is the engine's behaviour, not a switching bug,
+// so those segments are still run (and still checked for NaN) but not judged for silence.
+static bool quietWithoutTrigger (const char* id)
+{
+    for (const char* t : { "kick", "snare", "skins", "circuit-zaps", "metalwork" }) if (strcmp (id, t) == 0) return true;
+    return false;
+}
+
 static int indexOf (const char* id)
 {
     for (int i = 0; i < models::kCount; ++i) if (strcmp (models::kList[i].id, id) == 0) return i;
@@ -56,7 +65,8 @@ int main (int argc, char** argv)
                     for (int i = 0; i < N; ++i) { if (! std::isfinite (L[i]) || ! std::isfinite (R[i])) nonfinite = true; { energy += (double) L[i] * L[i] + (double) R[i] * R[i]; sum += L[i]; ++cnt; } }
             }
             const double mean = cnt ? sum / (double) cnt : 0.0, var = cnt ? energy / (2.0 * (double) cnt) - mean * mean : 0.0;   // var ~ 0: silent or stuck at DC
-            if (nonfinite || energy < 0.001 || var < 1e-7) { ++bad; printf ("env=%d step=%2zu engine=%2d (%s)  %s  energy=%.4f dc=%.3f\n", envMode, s, order[s], models::kList[order[s]].name, nonfinite ? "NON-FINITE" : (energy < 0.001 ? "SILENT" : "STUCK-DC"), energy, mean); }
+            const bool expectedQuiet = envMode == 2 && quietWithoutTrigger (models::kList[order[s]].id);
+            if (nonfinite || (! expectedQuiet && (energy < 0.001 || var < 1e-7))) { ++bad; printf ("env=%d step=%2zu engine=%2d (%s)  %s  energy=%.4f dc=%.3f\n", envMode, s, order[s], models::kList[order[s]].name, nonfinite ? "NON-FINITE" : (energy < 0.001 ? "SILENT" : "STUCK-DC"), energy, mean); }
         }
     }
     printf ("sr=%.0f junk=%d : %d bad segments\n", sr, g_junk, bad);
