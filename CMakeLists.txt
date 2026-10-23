@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.22)
-project(PlaitsExtendedPlugin VERSION 0.1.0)
+project(PlaitsExtendedPlugin VERSION 0.2.0)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -70,6 +70,10 @@ endif()
 # --- Headless test of the DSP wrapper:  cmake --build build --target engine_test && build/engine_test ---
 add_executable(engine_test EXCLUDE_FROM_ALL src/engine_test.cpp)
 target_link_libraries(engine_test PRIVATE plaits_core)
+
+# --- Pitch Snap test (function, engine pitch, all models; JUCE-free):  cmake --build build --target pitch_snap_test && build/pitch_snap_test ---
+add_executable(pitch_snap_test EXCLUDE_FROM_ALL src/pitch_snap_test.cpp)
+target_link_libraries(pitch_snap_test PRIVATE plaits_core)
 
 # --- Engine-switching regression test:  JUNK=0xFF build/sweep_test ---
 add_executable(sweep_test EXCLUDE_FROM_ALL src/sweep_test.cpp)

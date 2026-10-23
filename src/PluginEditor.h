@@ -50,7 +50,8 @@ private:
     PlaitsLookAndFeel laf;
 
     Knob harmonics, timbre, morph, macro, fmAmount, timbreAmount, morphAmount, transpose, fine, decay, lpgColour;
-    Choice engine, envelope;
+    Choice engine, envelope, pitchSnap;
+    std::unique_ptr<juce::ParameterAttachment> snapReadoutAtt, fineReadoutAtt;   // keep the Transpose readout in step
 
     juce::Label modelInfo;
     juce::TextButton aboutButton { "ABOUT" };
