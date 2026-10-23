@@ -34,6 +34,9 @@ Confirmed by the GitHub macOS build (Actions run for commit `46d3d1e`) and, for 
 | Switching models while notes play, with junk-filled memory (`sweep_test`) | passes in macOS CI |
 | Every engine fits the shared RAM block (`ram_probe`; largest need 16 KB of 32 KB) | passes in macOS CI |
 | All models through the real plug-in code: menu index <-> model name, MIDI -> sound, Macro 4, state save/restore (`plugin_test`) | passes in macOS CI |
+| Pitch Snap (Off / Steps / Semitones on Transpose + Fine Tune, 0.2.0): the snapping function is exact, the pitch lands on the snapped note (measured), every model stays finite in all three modes (`pitch_snap_test`); the real parameters give the same pitch and a project saved without it loads with it Off (`plugin_test`) | passes in macOS CI |
+| Pitch Snap Off sounds exactly like 0.1.0: 130 million samples (every model x 3 envelope modes x 5 Transpose values x 2 sample rates) from the 0.1.0 engine and the new engine compared byte for byte | identical, checked once on Linux (g++), not part of CI |
+| Pitch Snap in Logic: menu, Transpose readout, sound | **not yet checked** |
 | Download is universal (arm64 + x86_64), minimum macOS 11 | built with those settings; **not independently confirmed** (the `lipo` lines are in the CI log of the "Package" step) |
 | Loads in Logic on the M4 Mac mini | **not yet checked** |
 | Loads on the Intel Mac (macOS 12.7) | **not yet checked** |
