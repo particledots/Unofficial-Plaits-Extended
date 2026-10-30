@@ -62,6 +62,11 @@ jobs:
              Ping or Gate envelope with them; in Drone mode they stay silent, as they do on the hardware.
           7. Credits and licences: see the "licenses" folder, and the ABOUT button in the plug-in.
           TXT
+          # Easy installer for Logic (double-click; same file in every Unofficial plugin)
+          cp tools/install/Install-Unofficial-Plugin.command dist/
+          chmod +x dist/Install-Unofficial-Plugin.command
+          if [ -f dist/INSTALL.txt ]; then printf '\nEASY INSTALL (Logic, Audio Unit): double-click Install-Unofficial-Plugin.command in this folder. It asks for your Mac password once.\n' >> dist/INSTALL.txt; fi
+          [ -x dist/Install-Unofficial-Plugin.command ] || { echo "::error::PACKAGE missing Install-Unofficial-Plugin.command"; exit 1; }
           ditto -c -k --keepParent dist Plaits-Extended-macOS.zip
 
       - uses: actions/upload-artifact@v4
